@@ -1,4 +1,3 @@
-# .github/workflows/frontend-ci.yml
 name: Frontend CI/CD
 
 on:
@@ -48,4 +47,4 @@ jobs:
       - name: Push Docker image
         working-directory: frontend
         run: |
-          docker push ghcr.io/${{ github.repository }}/frontend:latest
+          docker push ghcr.io/${GITHUB_REPOSITORY,,}/frontend:latest
