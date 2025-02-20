@@ -2,16 +2,41 @@ import streamlit as st
 import requests
 from PIL import Image
 import io
+import os
 import pandas as pd
 
+# Dossier contenant les images prédéfinies
+IMAGE_FOLDER = "images"
+
 st.markdown("<h1 style='text-align: center;'>🦴 Application de Détection de Fracture</h1>", unsafe_allow_html=True)
-st.markdown("### 📤 Téléversez une image de scanner pour détecter une fracture.")
+st.markdown("### 📤 Téléversez une image de scanner ou sélectionnez une image existante.")
 
-uploaded_file = st.file_uploader("📂 Choisissez une image...", type=["jpg", "jpeg", "png"])
+col1, col2 = st.columns([2, 1])
 
+# Téléversement d'une image
+with col1:
+    uploaded_file = st.file_uploader("📂 Choisissez une image...", type=["jpg", "jpeg", "png"])
+
+# Sélection d'une image du dossier "images"
+with col2:
+    image_list = os.listdir(IMAGE_FOLDER)
+    image_list = sorted([img for img in image_list if img.endswith(('.jpg', '.jpeg', '.png'))])  # Filtrer les images valides
+    selected_image = st.selectbox("📸 Ou sélectionnez une image :", ["Aucune"] + image_list)
+
+# Chargement de l'image sélectionnée ou téléversée
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    st.image(image, caption="🖼️ Image téléversée", use_container_width=True)
+    image_source = "upload"
+elif selected_image != "Aucune":
+    image_path = os.path.join(IMAGE_FOLDER, selected_image)
+    image = Image.open(image_path)
+    image_source = "selection"
+else:
+    image = None
+
+# Affichage de l'image sélectionnée/téléversée
+if image is not None:
+    st.image(image, caption="🖼️ Image sélectionnée", use_container_width=True)
     
     if st.button("🚀 Lancer la prédiction"):
         buf = io.BytesIO()
@@ -33,6 +58,9 @@ if uploaded_file is not None:
                 st.error("⚠️ Erreur lors de la prédiction : " + response.text)
         except Exception as e:
             st.error("🚨 Erreur de connexion au backend : " + str(e))
+
+
+
 
 # Bouton pour afficher/masquer l'architecture du modèle
 if 'architecture_shown' not in st.session_state:
