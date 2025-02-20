@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend/model:/app/model   # Assurez-vous que le fichier de poids est présent
+      - ./backend/model:/app/model 
   frontend:
     build: ./frontend
     ports:
