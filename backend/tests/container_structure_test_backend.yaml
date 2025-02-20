@@ -1,6 +1,5 @@
 schemaVersion: "1"
 
-# Vérification de l'existence de fichiers et dossiers essentiels
 fileExistenceTests:
   - name: "Vérifier que app.py est présent dans /app"
     path: "/app/app.py"
@@ -15,7 +14,6 @@ fileExistenceTests:
     path: "/app/Dockerfile"
     shouldExist: true
 
-# Vérification du bon fonctionnement de commandes importantes
 commandTests:
   - name: "Vérifier la version de Python"
     command: ["python", "--version"]

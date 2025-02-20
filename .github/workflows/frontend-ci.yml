@@ -40,7 +40,7 @@ jobs:
             -v $(pwd)/frontend:/test \
             ghcr.io/googlecontainertools/container-structure-test:latest \
             test --image ghcr.io/${GITHUB_REPOSITORY,,}/frontend:latest \
-            --config container_structure_test_frontend.yaml
+            --config test/tests/container_structure_test_frontend.yaml
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
