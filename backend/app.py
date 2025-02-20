@@ -38,3 +38,16 @@ async def predict(file: UploadFile = File(...)):
         return {"prediction": prediction_label, "probability": probability}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/architecture")
+async def get_model_architecture():
+    global model
+    if model is None:
+        raise HTTPException(status_code=500, detail="Modèle non chargé")
+
+    # Récupérer l'architecture du modèle sous forme de texte
+    model_summary = []
+    model.summary(print_fn=lambda x: model_summary.append(x))
+    model_summary_text = "\n".join(model_summary)
+
+    return {"architecture": model_summary_text}
