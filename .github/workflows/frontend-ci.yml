@@ -37,10 +37,10 @@ jobs:
         working-directory: frontend
         run: |
           docker run --rm \
-            -v $(pwd)/frontend: \
+            -v $(pwd)/frontend:/test \
             ghcr.io/googlecontainertools/container-structure-test:latest \
             test --image ghcr.io/${GITHUB_REPOSITORY,,}/frontend:latest \
-            --config /tests/container_structure_test_frontend.yaml
+            --config container_structure_test_frontend.yaml
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
