@@ -1,0 +1,25 @@
+schemaVersion: "1"
+
+# Vérification de l'existence de fichiers et dossiers essentiels
+fileExistenceTests:
+  - name: "Vérifier que app.py est présent dans /app"
+    path: "/app/app.py"
+    shouldExist: true
+  - name: "Vérifier que le dossier model existe dans /app"
+    path: "/app/model"
+    shouldExist: true
+  - name: "Vérifier que requirements.txt est présent dans /app"
+    path: "/app/requirements.txt"
+    shouldExist: true
+  - name: "Vérifier que Dockerfile est présent dans /app"
+    path: "/app/Dockerfile"
+    shouldExist: true
+
+# Vérification du bon fonctionnement de commandes importantes
+commandTests:
+  - name: "Vérifier la version de Python"
+    command: ["python", "--version"]
+    expectedOutput: "Python"
+  - name: "Vérifier que uvicorn est installé"
+    command: ["uvicorn", "--version"]
+    expectedOutput: "uvicorn"
