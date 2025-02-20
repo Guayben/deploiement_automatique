@@ -2,11 +2,7 @@ name: Frontend CI/CD
 
 on:
   push:
-    paths:
-      - 'frontend/**'
   pull_request:
-    paths:
-      - 'frontend/**'
 
 jobs:
   build-test-deploy:
