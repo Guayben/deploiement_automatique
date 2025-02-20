@@ -54,4 +54,4 @@ jobs:
       - name: Push Docker image
         working-directory: backend
         run: |
-          docker push ghcr.io/${GITHUB_REPOSITORY,,}/backend:latest
+          docker push ghcr.io/${{ github.repository }}/backend:latest
