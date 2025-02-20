@@ -33,11 +33,11 @@ jobs:
         run: |
           docker build -t ghcr.io/${GITHUB_REPOSITORY,,}/frontend:latest .
       
-      - name: Run Container Structure Tests for backend
-        working-directory: backend
+      - name: Run Container Structure Tests for frontend
+        working-directory: frontend
         run: |
           docker run --rm \
-            -v $(pwd)/frontend:/test \
+            -v $(pwd)/frontend: \
             ghcr.io/googlecontainertools/container-structure-test:latest \
             test --image ghcr.io/${GITHUB_REPOSITORY,,}/frontend:latest \
             --config /tests/container_structure_test_frontend.yaml
