@@ -2,6 +2,8 @@
 import io
 from fastapi.testclient import TestClient
 from app import app
+import requests
+
 
 client = TestClient(app)
 
@@ -21,11 +23,14 @@ def test_predict_valid_file():
     image.save(buf, format="JPEG")
     buf.seek(0)
     
-    response = client.post(
-        "/predict",
+    response = requests.post(
+        "http://127.0.0.1:8000/predict",
         files={"file": ("test.jpg", buf, "image/jpeg")}
     )
+
     # Pour ce test, on s'attend à recevoir un résultat même si le modèle n'est pas entraîné
+    print("Response status:", response.status_code)
+    print("Response text:", response.text)
     assert response.status_code == 200
     data = response.json()
     assert "prediction" in data

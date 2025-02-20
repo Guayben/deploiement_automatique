@@ -30,7 +30,6 @@ async def predict(file: UploadFile = File(...)):
         image_array = np.array(image) / 255.0
         image_array = np.expand_dims(image_array, axis=0)  # ajout de la dimension batch
 
-        
         prediction = model.predict(image_array)
         # Pour une classification binaire avec seuil 0.5
         prediction_label = int(prediction[0][0] >= 0.5)
