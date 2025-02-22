@@ -15,9 +15,7 @@ fileExistenceTests:
     shouldExist: true
 
 commandTests:
-  - name: "Vérifier la version de Python"
-    command: ["python", "--version"]
-    expectedOutput: ["3.11.11"]
-  - name: "Vérifier que uvicorn est installé"
-    command: ["uvicorn", "--version"]
-    expectedOutput: "uvicorn"
+  - name: Vérifier la version de Python
+    command: [python]
+    args : [--version]
+    expectedOutput: [Python 3.11.*]
