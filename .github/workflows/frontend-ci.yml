@@ -33,6 +33,19 @@ jobs:
         run: |
           docker build -t ghcr.io/${GITHUB_REPOSITORY,,}/frontend:latest .
 
+      - name: Start Docker service
+        run: sudo systemctl start docker
+      
+      - name: Run Container Structure Tests for frontend
+        working-directory: frontend
+        run: |
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v $(pwd):/test \
+            ghcr.io/googlecontainertools/container-structure-test:latest \
+            test --image ghcr.io/${GITHUB_REPOSITORY,,}/frontend:latest \
+            --config /test/tests/container_structure_test_frontend.yaml
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v2
         with:
