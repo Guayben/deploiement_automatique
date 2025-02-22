@@ -46,6 +46,7 @@ jobs:
         working-directory: backend
         run: |
           docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
             -v $(pwd):/test \
             ghcr.io/googlecontainertools/container-structure-test:latest \
             test --image ghcr.io/${GITHUB_REPOSITORY,,}/backend:latest \
