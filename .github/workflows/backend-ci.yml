@@ -43,7 +43,7 @@ jobs:
         working-directory: backend
         run: |
           docker run --rm \
-            -v $(pwd)/backend:/test \
+            -v $(pwd):/test \
             ghcr.io/googlecontainertools/container-structure-test:latest \
             test --image ghcr.io/${GITHUB_REPOSITORY,,}/backend:latest \
             --config /test/tests/container_structure_test_backend.yaml
