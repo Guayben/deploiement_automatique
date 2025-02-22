@@ -32,6 +32,9 @@ jobs:
         working-directory: frontend
         run: |
           docker build -t ghcr.io/${GITHUB_REPOSITORY,,}/frontend:latest .
+
+      - name: Start Docker service
+        run: sudo systemctl start docker
       
       - name: Run Container Structure Tests for frontend
         working-directory: frontend
