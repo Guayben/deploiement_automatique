@@ -1,4 +1,4 @@
-schemaVersion: '2.0'
+schemaVersion: '2.0.0'
 
 fileExistence:
   - name: "Vérifier que app.py est présent dans /app"
