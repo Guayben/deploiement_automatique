@@ -37,7 +37,7 @@ jobs:
         working-directory: frontend
         run: |
           docker run --rm \
-            -v $(pwd)/frontend:/test \
+            -v $(pwd):/test \
             ghcr.io/googlecontainertools/container-structure-test:latest \
             test --image ghcr.io/${GITHUB_REPOSITORY,,}/frontend:latest \
             --config /test/tests/container_structure_test_frontend.yaml

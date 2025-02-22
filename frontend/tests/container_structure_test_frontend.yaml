@@ -1,6 +1,6 @@
-schemaVersion: "1"
+schemaVersion: '2.0'
 
-fileExistenceTests:
+fileExistence:
   - name: "Vérifier que app.py est présent dans /app"
     path: "/app/app.py"
     shouldExist: true
@@ -14,7 +14,9 @@ fileExistenceTests:
 commandTests:
   - name: "Vérifier la version de Python"
     command: ["python", "--version"]
-    expectedOutput: "Python"
+    expectedOutput:
+      - "Python"
   - name: "Vérifier que streamlit est installé"
     command: ["streamlit", "--version"]
-    expectedOutput: "Streamlit"
+    expectedOutput:
+      - "Streamlit"
