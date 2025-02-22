@@ -1,6 +1,6 @@
 schemaVersion: '2.0.0'
 
-fileExistence:
+fileExistenceTests:
   - name: "Vérifier que app.py est présent dans /app"
     path: "/app/app.py"
     shouldExist: true
@@ -17,9 +17,7 @@ fileExistence:
 commandTests:
   - name: "Vérifier la version de Python"
     command: ["python", "--version"]
-    expectedOutput:
-      - "Python"
+    expectedOutput: ["Python"]
   - name: "Vérifier que uvicorn est installé"
     command: ["uvicorn", "--version"]
-    expectedOutput:
-      - "uvicorn"
+    expectedOutput: ["uvicorn"]
