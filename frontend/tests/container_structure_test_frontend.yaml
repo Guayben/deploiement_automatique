@@ -14,8 +14,7 @@ fileExistenceTests:
 commandTests:
   - name: "Vérifier la version de Python"
     command: ["python", "--version"]
-    expectedOutput: ["Python"]
+    expectedOutput: ["3.11.11"]
   - name: "Vérifier que streamlit est installé"
     command: ["streamlit", "--version"]
-    expectedOutput:
-      - "Streamlit"
+    expectedOutput: ["Streamlit"]
