@@ -5,11 +5,9 @@ from app import app
 import requests
 
 
-client = TestClient(app)
-
 def test_predict_invalid_file():
-    response = client.post(
-        "/predict",
+    response = requests.post(
+        "http://127.0.0.1:8000/predict",
         files={"file": ("test.txt", b"notanimage", "text/plain")}
     )
     assert response.status_code == 400

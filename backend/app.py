@@ -3,11 +3,10 @@ import numpy as np
 from PIL import Image
 import io
 import tensorflow as tf
-from model.cnn_model import build_cnn_model
 
 app = FastAPI(title="API de détection de fracture")
 
-# Variable globale pour le modèle
+
 model = None
 
 @app.on_event("startup")
@@ -28,7 +27,7 @@ async def predict(file: UploadFile = File(...)):
         image = Image.open(io.BytesIO(contents)).convert("RGB")
         image = image.resize((224, 224))
         image_array = np.array(image) / 255.0
-        image_array = np.expand_dims(image_array, axis=0)  # ajout de la dimension batch
+        image_array = np.expand_dims(image_array, axis=0) 
 
         prediction = model.predict(image_array)
         # Pour une classification binaire avec seuil 0.5
@@ -44,7 +43,6 @@ async def get_model_architecture():
     if model is None:
         raise HTTPException(status_code=500, detail="Modèle non chargé")
 
-    # Récupérer l'architecture du modèle sous forme de texte
     model_summary = []
     model.summary(print_fn=lambda x: model_summary.append(x))
     model_summary_text = "\n".join(model_summary)
