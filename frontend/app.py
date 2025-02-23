@@ -5,7 +5,6 @@ import io
 import os
 import pandas as pd
 
-# Dossier contenant les images prédéfinies
 IMAGE_FOLDER = "images"
 
 st.markdown("<h1 style='text-align: center;'>🦴 Application de Détection de Fracture</h1>", unsafe_allow_html=True)
@@ -13,17 +12,14 @@ st.markdown("### 📤 Téléversez une image de scanner ou sélectionnez une ima
 
 col1, col2 = st.columns([2, 1])
 
-# Téléversement d'une image
 with col1:
     uploaded_file = st.file_uploader("📂 Choisissez une image...", type=["jpg", "jpeg", "png"])
 
-# Sélection d'une image du dossier "images"
 with col2:
     image_list = os.listdir(IMAGE_FOLDER)
     image_list = sorted([img for img in image_list if img.endswith(('.jpg', '.jpeg', '.png'))])  # Filtrer les images valides
     selected_image = st.selectbox("📸 Ou sélectionnez une image :", ["Aucune"] + image_list)
 
-# Chargement de l'image sélectionnée ou téléversée
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
     image_source = "upload"
@@ -77,14 +73,13 @@ if st.session_state.architecture_shown:
             architecture = response.json()["architecture"]
             lines = architecture.split("\n")
 
-            # Extraction des couches
             start_index = None
             end_index = None
             for i, line in enumerate(lines):
                 if "Layer (type)" in line and "Output Shape" in line and "Param #" in line:
-                    start_index = i + 1  # Début du tableau
+                    start_index = i + 1 
                 if "Total params" in line:
-                    end_index = i  # Fin des couches
+                    end_index = i 
                     break
 
             if start_index is not None and end_index is not None:
@@ -95,21 +90,17 @@ if st.session_state.architecture_shown:
             # Création du tableau en DataFrame pour un affichage propre
             table_data = []
             for line in layer_lines:
-                # Découpe correcte des éléments avec espace multiple et en s'assurant que l'on a 3 parties
                 parts = [part.strip() for part in line.split("│") if part.strip()]
-                if len(parts) == 3:  # Vérification que la ligne contient bien 3 parties
+                if len(parts) == 3: 
                     layer_type = parts[0]
                     output_shape = parts[1]
                     params = parts[2]
                     table_data.append([layer_type, output_shape, params])
 
-            # Conversion en DataFrame pour affichage propre
             df = pd.DataFrame(table_data, columns=["Layer (type)", "Output Shape", "Parameters"])
 
-            # Affichage propre avec st.table()
             st.table(df)
 
-            # Affichage du résumé des paramètres
             summary_lines = lines[end_index:] if end_index else []
             for line in summary_lines:
                 if "Total params" in line:

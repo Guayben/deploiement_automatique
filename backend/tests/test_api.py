@@ -26,9 +26,6 @@ def test_predict_valid_file():
         files={"file": ("test.jpg", buf, "image/jpeg")}
     )
 
-    # Pour ce test, on s'attend à recevoir un résultat même si le modèle n'est pas entraîné
-    print("Response status:", response.status_code)
-    print("Response text:", response.text)
     assert response.status_code == 200
     data = response.json()
     assert "prediction" in data
