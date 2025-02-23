@@ -59,7 +59,7 @@ projet_deploiement_auto
 ### Cloner le dépôt
 
 ```bash
-git clone https://github.com/<ton-repo>/projet_deploiement_auto.git
+git clone https://github.com/guayben/projet_deploiement_auto.git
 cd projet_deploiement_auto
 ```
 
