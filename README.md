@@ -87,6 +87,7 @@ pytest tests/test_api.py
 
 ```bash
 cd frontend
+pip install -r requirements.txt
 pytest tests/test_streamlit.py
 ```
 
