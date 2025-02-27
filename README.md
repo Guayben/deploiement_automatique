@@ -54,13 +54,13 @@ projet_deploiement_auto
 
 ### Prérequis
 
-- Docker et Docker Compose installés sur votre machine.
+- Docker installé sur votre machine.
 
 ### Cloner le dépôt
 
 ```bash
-git clone https://github.com/guayben/projet_deploiement_auto.git
-cd projet_deploiement_auto
+git clone https://github.com/Guayben/deploiement_automatique.git
+cd deploiement_automatique
 ```
 
 ### Lancer l’application avec Docker
@@ -80,12 +80,14 @@ Cela démarre :
 ### Exécuter les tests API et unitaires
 
 ```bash
+pip install pytest
 cd backend
 pip install -r requirements.txt
 pytest tests/test_api.py
 ```
 
 ```bash
+pip install pytest
 cd frontend
 pip install -r requirements.txt
 pytest tests/test_streamlit.py
